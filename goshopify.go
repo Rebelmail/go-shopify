@@ -44,10 +44,11 @@ type Client struct {
 	token string
 
 	// Services used for communicating with the API
-	Product  ProductService
-	Customer CustomerService
-	Order    OrderService
 	Shop     ShopService
+	Customer CustomerService
+	Product  ProductService
+	Checkout CheckoutService
+	Order    OrderService
 	Webhook  WebhookService
 }
 
@@ -133,10 +134,11 @@ func NewClient(app App, shopName, token string) *Client {
 	baseURL, _ := url.Parse(ShopBaseUrl(shopName))
 
 	c := &Client{client: httpClient, app: app, baseURL: baseURL, token: token}
-	c.Product = &ProductServiceOp{client: c}
-	c.Customer = &CustomerServiceOp{client: c}
-	c.Order = &OrderServiceOp{client: c}
 	c.Shop = &ShopServiceOp{client: c}
+	c.Customer = &CustomerServiceOp{client: c}
+	c.Product = &ProductServiceOp{client: c}
+	c.Checkout = &CheckoutServiceOp{client: c}
+	c.Order = &OrderServiceOp{client: c}
 	c.Webhook = &WebhookServiceOp{client: c}
 
 	return c

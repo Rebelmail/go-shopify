@@ -77,56 +77,6 @@ type Order struct {
 	LineItems             []LineItem       `json:"line_items"`
 }
 
-type Address struct {
-	ID           int     `json:"id"`
-	Address1     string  `json:"address1"`
-	Address2     string  `json:"address2"`
-	City         string  `json:"city"`
-	Company      string  `json:"company"`
-	Country      string  `json:"country"`
-	CountryCode  string  `json:"country_code"`
-	FirstName    string  `json:"first_name"`
-	LastName     string  `json:"last_name"`
-	Latitude     float64 `json:"latitude"`
-	Longitude    float64 `json:"longitude"`
-	Name         string  `json:"name"`
-	Phone        string  `json:"phone"`
-	Province     string  `json:"province"`
-	ProvinceCode string  `json:"province_code"`
-	Zip          string  `json:"zip"`
-}
-
-type DiscountCode struct {
-	Amount *decimal.Decimal `json:"amount"`
-	Code   string           `json:"code"`
-	Type   string           `json:"type"`
-}
-
-type LineItem struct {
-	ID            int              `json:"id"`
-	ProductID     int              `json:"product_id"`
-	VariantID     int              `json:"variant_id"`
-	Quantity      int              `json:"quantity"`
-	Price         *decimal.Decimal `json:"price"`
-	TotalDiscount *decimal.Decimal `json:"total_discount"`
-	Title         string           `json:"title"`
-	VariantTitle  string           `json:"variant_title"`
-	Name          string           `json:"name"`
-	SKU           string           `json:"sku"`
-	Vendor        string           `json:"vendor"`
-	GiftCard      bool             `json:"gift_card"`
-	Taxable       bool             `json:"taxable"`
-}
-
-type LineItemProperty struct {
-	Message string `json:"message"`
-}
-
-type NoteAttribute struct {
-	Name  string `json:"Name"`
-	Value string `json:"Value"`
-}
-
 // Represents the result from the orders/X.json endpoint
 type OrderResource struct {
 	Order *Order `json:"order"`

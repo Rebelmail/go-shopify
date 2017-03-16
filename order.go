@@ -45,38 +45,38 @@ type OrderListOptions struct {
 
 // Order represents a Shopify order
 type Order struct {
-	ID                    int              `json:"id"`
-	Name                  string           `json:"name"`
-	Email                 string           `json:"email"`
-	CreatedAt             *time.Time       `json:"created_at"`
-	UpdatedAt             *time.Time       `json:"updated_at"`
-	ClosedAt              *time.Time       `json:"closed_at"`
-	ProcessedAt           *time.Time       `json:"processed_at"`
-	Customer              *Customer        `json:"customer"`
-	BillingAddress        *Address         `json:"billing_address"`
-	ShippingAddress       *Address         `json:"shipping_address"`
-	Currency              string           `json:"currency"`
-	TotalPrice            *decimal.Decimal `json:"total_price"`
-	SubtotalPrice         *decimal.Decimal `json:"subtotal_price"`
-	TotalDiscounts        *decimal.Decimal `json:"total_discounts"`
-	TotalLineItemsPrice   *decimal.Decimal `json:"total_line_items_price"`
-	TotalTax              *decimal.Decimal `json:"total_tax"`
-	TotalWeight           int              `json:"total_weight"`
-	FinancialStatus       string           `json:"financial_status"`
-	FulfillmentStatus     string           `json:"fulfillment_status"`
-	Token                 string           `json:"token"`
-	CartToken             string           `json:"cart_token"`
-	Number                int              `json:"number"`
-	OrderNumber           int              `json:"order_number"`
-	Note                  string           `json:"note"`
-	Test                  bool             `json:"test"`
-	BrowserIp             string           `json:"browser_ip"`
-	BuyerAcceptsMarketing bool             `json:"buyer_accepts_marketing"`
-	CancelReason          string           `json:"cancel_reason"`
-	NoteAttributes        []NoteAttribute  `json:"note_attributes"`
-	DiscountCodes         []DiscountCode   `json:"discount_codes"`
+	ID                    int              `json:"id,omitempty",`
+	Name                  string           `json:"name,omitempty"`
+	Email                 string           `json:"email,omitempty"`
+	CreatedAt             *time.Time       `json:"created_at,omitempty"`
+	UpdatedAt             *time.Time       `json:"updated_at,omitempty"`
+	ClosedAt              *time.Time       `json:"closed_at,omitempty"`
+	ProcessedAt           *time.Time       `json:"processed_at,omitempty"`
+	Customer              *Customer        `json:"customer,omitempty"`
+	BillingAddress        *Address         `json:"billing_address,omitempty"`
+	ShippingAddress       *Address         `json:"shipping_address,omitempty"`
+	Currency              string           `json:"currency,omitempty"`
+	TotalPrice            *decimal.Decimal `json:"total_price,omitempty"`
+	SubtotalPrice         *decimal.Decimal `json:"subtotal_price,omitempty"`
+	TotalDiscounts        *decimal.Decimal `json:"total_discounts,omitempty"`
+	TotalLineItemsPrice   *decimal.Decimal `json:"total_line_items_price,omitempty"`
+	TotalTax              *decimal.Decimal `json:"total_tax,omitempty"`
+	TotalWeight           int              `json:"total_weight,omitempty"`
+	FinancialStatus       string           `json:"financial_status,omitempty"`
+	FulfillmentStatus     string           `json:"fulfillment_status,omitempty"`
+	Token                 string           `json:"token,omitempty"`
+	CartToken             string           `json:"cart_token,omitempty"`
+	Number                int              `json:"number,omitempty"`
+	OrderNumber           int              `json:"order_number,omitempty"`
+	Note                  string           `json:"note,omitempty"`
+	Test                  bool             `json:"test,omitempty"`
+	BrowserIp             string           `json:"browser_ip,omitempty"`
+	BuyerAcceptsMarketing bool             `json:"buyer_accepts_marketing,omitempty"`
+	CancelReason          string           `json:"cancel_reason,omitempty"`
+	NoteAttributes        []NoteAttribute  `json:"note_attributes,omitempty"`
+	DiscountCodes         []DiscountCode   `json:"discount_codes,omitempty"`
 	LineItems             []LineItem       `json:"line_items"`
-	InventoryBehaviour    bool             `json:"inventory_behaviour"`
+	InventoryBehaviour    bool             `json:"inventory_behaviour,omitempty"`
 }
 
 // Represents the result from the orders/X.json endpoint

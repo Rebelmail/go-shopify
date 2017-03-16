@@ -16,6 +16,7 @@ type OrderService interface {
 	List(interface{}) ([]Order, error)
 	Count(interface{}) (int, error)
 	Get(int, interface{}) (*Order, error)
+	Create(Order) (*Order, error)
 }
 
 // OrderServiceOp handles communication with the order related methods of the
@@ -75,6 +76,7 @@ type Order struct {
 	NoteAttributes        []NoteAttribute  `json:"note_attributes"`
 	DiscountCodes         []DiscountCode   `json:"discount_codes"`
 	LineItems             []LineItem       `json:"line_items"`
+	InventoryBehaviour    bool             `json:"inventory_behaviour"`
 }
 
 // Represents the result from the orders/X.json endpoint
@@ -106,5 +108,14 @@ func (s *OrderServiceOp) Get(orderID int, options interface{}) (*Order, error) {
 	path := fmt.Sprintf("%s/%d.json", ordersBasePath, orderID)
 	resource := new(OrderResource)
 	err := s.client.Get(path, resource, options)
+	return resource.Order, err
+}
+
+// Create a new order
+func (s *OrderServiceOp) Create(order Order) (*Order, error) {
+	path := fmt.Sprintf("%s.json", ordersBasePath)
+	wrappedData := OrderResource{Order: &order}
+	resource := new(OrderResource)
+	err := s.client.Post(path, wrappedData, resource)
 	return resource.Order, err
 }

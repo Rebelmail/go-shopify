@@ -7,7 +7,7 @@ import (
 // Address represents one of the many addresses a customer may have.
 // See: https://help.shopify.com/api/reference/order#shipping-address-property
 type Address struct {
-	ID           int     `json:"id"`
+	ID           int64    `json:"id"`
 	Address1     string  `json:"address1"`
 	Address2     string  `json:"address2"`
 	City         string  `json:"city"`
@@ -36,10 +36,10 @@ type NoteAttribute struct {
 // LineItem is information about an item in the order.
 // See: https://help.shopify.com/api/reference/order#line-items-property
 type LineItem struct {
-	ID                 int              `json:"id,omitempty"`
-	ProductID          int              `json:"product_id,omitempty"`
-	VariantID          int              `json:"variant_id,omitempty"`
-	Quantity           int              `json:"quantity,omitempty"`
+	ID                 int64             `json:"id,omitempty"`
+	ProductID          int64             `json:"product_id,omitempty"`
+	VariantID          int64             `json:"variant_id,omitempty"`
+	Quantity           int64             `json:"quantity,omitempty"`
 	Price              *decimal.Decimal `json:"price"`
 	TotalDiscount      *decimal.Decimal `json:"total_discount,omitempty"`
 	Title              string           `json:"title"`
@@ -51,7 +51,7 @@ type LineItem struct {
 	Taxable            bool             `json:"taxable,omitempty"`
 	FulfillmentService string           `json:"fulfillment_service,omitempty"`
 	FulfillmentStatus  string           `json:"fulfillment_status,omitempty"`
-	Grams              int              `json:"grams,omitempty"`
+	Grams              int64             `json:"grams,omitempty"`
 	RequiresShipping   bool             `json:"requires_shipping,omitempty"`
 }
 

@@ -247,9 +247,9 @@ func CheckResponseError(r *http.Response) error {
 
 // General list options that can be used for most collections of entities.
 type ListOptions struct {
-	Page         int       `url:"page,omitempty"`
-	Limit        int       `url:"limit,omitempty"`
-	SinceID      int       `url:"since_id,omitempty"`
+	Page         int64     `url:"page,omitempty"`
+	Limit        int64     `url:"limit,omitempty"`
+	SinceID      int64     `url:"since_id,omitempty"`
 	CreatedAtMin time.Time `url:"created_at_min,omitempty"`
 	CreatedAtMax time.Time `url:"created_at_max,omitempty"`
 }
@@ -260,9 +260,9 @@ type CountOptions struct {
 	CreatedAtMax time.Time `url:"created_at_max,omitempty"`
 }
 
-func (c *Client) Count(path string, options interface{}) (int, error) {
+func (c *Client) Count(path string, options interface{}) (int64, error) {
 	resource := struct {
-		Count int `json:"count"`
+		Count int64 `json:"count"`
 	}{}
 	err := c.Get(path, &resource, options)
 	return resource.Count, err

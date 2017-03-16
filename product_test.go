@@ -41,7 +41,7 @@ func TestProductCount(t *testing.T) {
 		t.Errorf("Product.Count returned error: %v", err)
 	}
 
-	expected := 3
+	expected := int64(3)
 	if cnt != expected {
 		t.Errorf("Product.Count returned %d, expected %d", cnt, expected)
 	}
@@ -52,7 +52,7 @@ func TestProductCount(t *testing.T) {
 		t.Errorf("Product.Count returned error: %v", err)
 	}
 
-	expected = 2
+	expected = int64(2)
 	if cnt != expected {
 		t.Errorf("Product.Count returned %d, expected %d", cnt, expected)
 	}

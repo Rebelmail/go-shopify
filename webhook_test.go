@@ -86,7 +86,7 @@ func TestWebhookCount(t *testing.T) {
 		t.Errorf("Webhook.Count returned error: %v", err)
 	}
 
-	expected := 7
+	expected := int64(7)
 	if cnt != expected {
 		t.Errorf("Webhook.Count returned %d, expected %d", cnt, expected)
 	}
@@ -97,7 +97,7 @@ func TestWebhookCount(t *testing.T) {
 		t.Errorf("Webhook.Count returned error: %v", err)
 	}
 
-	expected = 2
+	expected = int64(2)
 	if cnt != expected {
 		t.Errorf("Webhook.Count returned %d, expected %d", cnt, expected)
 	}

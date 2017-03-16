@@ -14,8 +14,8 @@ const checkoutsBasePath = "admin/checkouts"
 // See: https://help.shopify.com/api/reference/abandoned_checkouts
 type CheckoutService interface {
 	List(interface{}) ([]Checkout, error)
-	Count(interface{}) (int, error)
-	Get(int, interface{}) (*Checkout, error)
+	Count(interface{}) (int64, error)
+	Get(int64, interface{}) (*Checkout, error)
 }
 
 // CheckoutServiceOp handles communication with the checkout related methods of
@@ -27,9 +27,9 @@ type CheckoutServiceOp struct {
 // A struct for all available checkout list options.
 // See: https://help.shopify.com/api/reference/abandoned_checkouts#index
 type CheckoutListOptions struct {
-	Page         int       `url:"page,omitempty"`
-	Limit        int       `url:"limit,omitempty"`
-	SinceID      int       `url:"since_id,omitempty"`
+	Page         int64     `url:"page,omitempty"`
+	Limit        int64     `url:"limit,omitempty"`
+	SinceID      int64     `url:"since_id,omitempty"`
 	Status       string    `url:"status,omitempty"`
 	CreatedAtMin time.Time `url:"created_at_min,omitempty"`
 	CreatedAtMax time.Time `url:"created_at_max,omitempty"`
@@ -39,7 +39,7 @@ type CheckoutListOptions struct {
 
 // Checkout represents a Shopify abandoned checkout
 type Checkout struct {
-	ID                    int              `json:"id"`
+	ID                    int64            `json:"id"`
 	Name                  string           `json:"name"`
 	Email                 string           `json:"email"`
 	CreatedAt             *time.Time       `json:"created_at"`
@@ -55,7 +55,7 @@ type Checkout struct {
 	TotalDiscounts        *decimal.Decimal `json:"total_discounts"`
 	TotalLineItemsPrice   *decimal.Decimal `json:"total_line_items_price"`
 	TotalTax              *decimal.Decimal `json:"total_tax"`
-	TotalWeight           int              `json:"total_weight"`
+	TotalWeight           int64            `json:"total_weight"`
 	Token                 string           `json:"token"`
 	CartToken             string           `json:"cart_token"`
 	Note                  string           `json:"note"`
@@ -106,13 +106,13 @@ func (s *CheckoutServiceOp) List(options interface{}) ([]Checkout, error) {
 }
 
 // Count checkouts
-func (s *CheckoutServiceOp) Count(options interface{}) (int, error) {
+func (s *CheckoutServiceOp) Count(options interface{}) (int64, error) {
 	path := fmt.Sprintf("%s/count.json", checkoutsBasePath)
 	return s.client.Count(path, options)
 }
 
 // Get individual checkout
-func (s *CheckoutServiceOp) Get(checkoutID int, options interface{}) (*Checkout, error) {
+func (s *CheckoutServiceOp) Get(checkoutID int64, options interface{}) (*Checkout, error) {
 	path := fmt.Sprintf("%s/%d.json", checkoutsBasePath, checkoutID)
 	resource := new(CheckoutResource)
 	err := s.client.Get(path, resource, options)

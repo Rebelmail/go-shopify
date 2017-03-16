@@ -41,7 +41,7 @@ func TestCustomerCount(t *testing.T) {
 		t.Errorf("Customer.Count returned error: %v", err)
 	}
 
-	expected := 5
+	expected := int64(5)
 	if cnt != expected {
 		t.Errorf("Customer.Count returned %d, expected %d", cnt, expected)
 	}
@@ -52,7 +52,7 @@ func TestCustomerCount(t *testing.T) {
 		t.Errorf("Customer.Count returned error: %v", err)
 	}
 
-	expected = 2
+	expected = int64(2)
 	if cnt != expected {
 		t.Errorf("Customer.Count returned %d, expected %d", cnt, expected)
 	}

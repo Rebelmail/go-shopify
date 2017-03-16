@@ -57,7 +57,7 @@ func TestNewRequest(t *testing.T) {
 	outBody := `{"hello":"World"}`
 
 	type extraOptions struct {
-		Limit int `url:"limit"`
+		Limit int64 `url:"limit"`
 	}
 
 	req, _ := c.NewRequest("GET", inURL, inBody, extraOptions{Limit: 10})
@@ -239,7 +239,7 @@ func TestCount(t *testing.T) {
 		t.Errorf("Client.Count returned error: %v", err)
 	}
 
-	expected := 5
+	expected := int64(5)
 	if cnt != expected {
 		t.Errorf("Client.Count returned %d, expected %d", cnt, expected)
 	}
@@ -251,7 +251,7 @@ func TestCount(t *testing.T) {
 		t.Errorf("Client.Count returned error: %v", err)
 	}
 
-	expected = 2
+	expected = int64(2)
 	if cnt != expected {
 		t.Errorf("Client.Count returned %d, expected %d", cnt, expected)
 	}

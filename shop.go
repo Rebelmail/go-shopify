@@ -2,7 +2,7 @@ package goshopify
 
 import "time"
 
-// ShopService is an interface for interfacing with the shop endpoint of the
+// ShopService is an interface for interfacing with the shop endpoint64of the
 // Shopify API.
 // See: https://help.shopify.com/api/reference/shop
 type ShopService interface {
@@ -17,7 +17,7 @@ type ShopServiceOp struct {
 
 // Shop represents a Shopify shop
 type Shop struct {
-	ID                      int        `json:"id"`
+	ID                      int64       `json:"id"`
 	Name                    string     `json:"name"`
 	ShopOwner               string     `json:"shop_owner"`
 	Email                   string     `json:"email"`

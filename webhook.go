@@ -12,8 +12,8 @@ const webhooksBasePath = "admin/webhooks"
 // See: https://help.shopify.com/api/reference/webhook
 type WebhookService interface {
 	List(interface{}) ([]Webhook, error)
-	Count(interface{}) (int, error)
-	Get(int, interface{}) (*Webhook, error)
+	Count(interface{}) (int64, error)
+	Get(int64, interface{}) (*Webhook, error)
 	Create(Webhook) (*Webhook, error)
 	Update(Webhook) (*Webhook, error)
 }
@@ -26,7 +26,7 @@ type WebhookServiceOp struct {
 
 // Webhook represents a Shopify webhook
 type Webhook struct {
-	ID                  int        `json:"id"`
+	ID                  int64       `json:"id"`
 	Address             string     `json:"address"`
 	Topic               string     `json:"topic"`
 	Format              string     `json:"format"`
@@ -59,13 +59,13 @@ func (s *WebhookServiceOp) List(options interface{}) ([]Webhook, error) {
 }
 
 // Count webhooks
-func (s *WebhookServiceOp) Count(options interface{}) (int, error) {
+func (s *WebhookServiceOp) Count(options interface{}) (int64, error) {
 	path := fmt.Sprintf("%s/count.json", webhooksBasePath)
 	return s.client.Count(path, options)
 }
 
 // Get individual webhook
-func (s *WebhookServiceOp) Get(webhookdID int, options interface{}) (*Webhook, error) {
+func (s *WebhookServiceOp) Get(webhookdID int64, options interface{}) (*Webhook, error) {
 	path := fmt.Sprintf("%s/%d.json", webhooksBasePath, webhookdID)
 	resource := new(WebhookResource)
 	err := s.client.Get(path, resource, options)

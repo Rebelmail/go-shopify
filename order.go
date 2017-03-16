@@ -14,8 +14,8 @@ const ordersBasePath = "admin/orders"
 // See: https://help.shopify.com/api/reference/order
 type OrderService interface {
 	List(interface{}) ([]Order, error)
-	Count(interface{}) (int, error)
-	Get(int, interface{}) (*Order, error)
+	Count(interface{}) (int64, error)
+	Get(int64, interface{}) (*Order, error)
 	Create(Order) (*Order, error)
 }
 
@@ -28,9 +28,9 @@ type OrderServiceOp struct {
 // A struct for all available order list options.
 // See: https://help.shopify.com/api/reference/order#index
 type OrderListOptions struct {
-	Page              int       `url:"page,omitempty"`
-	Limit             int       `url:"limit,omitempty"`
-	SinceID           int       `url:"since_id,omitempty"`
+	Page              int64      `url:"page,omitempty"`
+	Limit             int64      `url:"limit,omitempty"`
+	SinceID           int64      `url:"since_id,omitempty"`
 	Status            string    `url:"status,omitempty"`
 	FinancialStatus   string    `url:"financial_status,omitempty"`
 	FulfillmentStatus string    `url:"fulfillment_status,omitempty"`
@@ -45,7 +45,7 @@ type OrderListOptions struct {
 
 // Order represents a Shopify order
 type Order struct {
-	ID                    int              `json:"id,omitempty",`
+	ID                    int64             `json:"id,omitempty",`
 	Name                  string           `json:"name,omitempty"`
 	Email                 string           `json:"email,omitempty"`
 	CreatedAt             *time.Time       `json:"created_at,omitempty"`
@@ -61,13 +61,13 @@ type Order struct {
 	TotalDiscounts        *decimal.Decimal `json:"total_discounts,omitempty"`
 	TotalLineItemsPrice   *decimal.Decimal `json:"total_line_items_price,omitempty"`
 	TotalTax              *decimal.Decimal `json:"total_tax,omitempty"`
-	TotalWeight           int              `json:"total_weight,omitempty"`
+	TotalWeight           int64             `json:"total_weight,omitempty"`
 	FinancialStatus       string           `json:"financial_status,omitempty"`
 	FulfillmentStatus     string           `json:"fulfillment_status,omitempty"`
 	Token                 string           `json:"token,omitempty"`
 	CartToken             string           `json:"cart_token,omitempty"`
-	Number                int              `json:"number,omitempty"`
-	OrderNumber           int              `json:"order_number,omitempty"`
+	Number                int64             `json:"number,omitempty"`
+	OrderNumber           int64             `json:"order_number,omitempty"`
 	Note                  string           `json:"note,omitempty"`
 	Test                  bool             `json:"test,omitempty"`
 	BrowserIp             string           `json:"browser_ip,omitempty"`
@@ -98,13 +98,13 @@ func (s *OrderServiceOp) List(options interface{}) ([]Order, error) {
 }
 
 // Count orders
-func (s *OrderServiceOp) Count(options interface{}) (int, error) {
+func (s *OrderServiceOp) Count(options interface{}) (int64, error) {
 	path := fmt.Sprintf("%s/count.json", ordersBasePath)
 	return s.client.Count(path, options)
 }
 
 // Get individual order
-func (s *OrderServiceOp) Get(orderID int, options interface{}) (*Order, error) {
+func (s *OrderServiceOp) Get(orderID int64, options interface{}) (*Order, error) {
 	path := fmt.Sprintf("%s/%d.json", ordersBasePath, orderID)
 	resource := new(OrderResource)
 	err := s.client.Get(path, resource, options)

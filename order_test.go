@@ -117,7 +117,7 @@ func TestOrderCount(t *testing.T) {
 		t.Errorf("Order.Count returned error: %v", err)
 	}
 
-	expected := 7
+	expected := int64(7)
 	if cnt != expected {
 		t.Errorf("Order.Count returned %d, expected %d", cnt, expected)
 	}
